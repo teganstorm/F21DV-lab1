@@ -1,0 +1,2 @@
+ShapeType, x, y, Width, Height, Fill, cx, cy,r, rx, ry
+"circle", , , , , "pink", 60, 60, 50, , 
