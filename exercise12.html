@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+	<button> <a href="index.html">Back</a> </button>
+	<div></div>
+	<script>
+		//Create SVG element
+    var svg = d3.select("body") 
+      .append("svg")
+      .attr("width", 400)
+      .attr("height", 400) 
+      .style("border", '2px solid black');
+
+    var data = 'https://raw.githubusercontent.com/teganstorm/F21DV-lab1/master/svg.csv';
+    d3.csv(data).then(function(data) {
+      for (var i=0; i<data.length; i++) {
+        var entry = data[i];
+        var shape = entry.ShapeType;
+
+        if (shape == "circle") {
+          svg.append(shape)
+            .attr("cx", entry.cx) 
+            .attr("cy", entry.cy) 
+            .attr("r", entry.r)
+        }
+        else if (shape == "rect") {
+          svg.append(shape)
+            .attr("x", entry.x) 
+            .attr("y", entry.y) 
+            .attr("width", entry.Width) 
+            .attr("height", entry.Height) 
+            .attr("fill", entry.Fill)
+        }
+
+      }
+    })
+
+    
+	</script>
+</body>
+
+</html>
