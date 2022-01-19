@@ -45,22 +45,22 @@
           male++;
         } 
       }
-      console.log("Mr. Count: "+mr);
-	    console.log("Mrs Count: "+mrs);
-	    console.log("Other Names Count: "+other);
-	    console.log("Female Count: "+female);
-      console.log("Male Count: "+male);
-	    console.log("50 years and over Count: "+over50);
-      console.log("Under 50 years Count: "+under50);    
+      let e1 = d3.select("body").append('p')
+      e1.text("Mr. Count: "+mr);
+      let e2 = d3.select("body").append('p')
+	e2.text("Mrs Count: "+mrs);
+      let e3 = d3.select("body").append('p')
+	e3.text("Other Names Count: "+other);
+      let e4 = d3.select("body").append('p')
+	 e4.text("Female Count: "+female);
+      let e5 = d3.select("body").append('p')
+      e5.text("Male Count: "+male);
+      let e6 = d3.select("body").append('p')
+	e6.text("50 years and over Count: "+over50);
+      let e7 = d3.select("body").append('p')
+      e7.text("Under 50 years Count: "+under50);    
     })
   </script>
-  <h1>Mr. Count: 240</h1>
-  <h1>Mrs Count: 72</h1>
-  <h1>Other Names Count: 106</h1>
-  <h1>Female Count: 152</h1>
-  <h1>Male Count: 266</h1>
-  <h1>50 years and over Count: 31</h1>
-  <h1>Under 50 years Count: 382</h1>
 </body>
 
 </html>
