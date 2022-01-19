@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<script src='https://d3js.org/d3.v7.min.js'></script>
-</head>
-
-<body>
-	<button> <a href="index.html">Back</a> </button>
-	<div></div>
 	<script>
 		//Create SVG element
     var svg = d3.select("body") 
@@ -21,21 +11,20 @@
       for (var i=0; i<data.length; i++) {
         var entry = data[i];
         var shape = entry.ShapeType;
-        console.log(entry)
 
         if (shape == "circle") {
           console.log("Circle found");
           svg.append(shape)
-            .attr("cx", entry.cx) 
-            .attr("cy", entry.cy) 
-            .attr("r", entry.r)
+            .attr("cx", entry.Cx) 
+            .attr("cy", entry.Cy) 
+            .attr("r", entry.R)
             .attr("fill", entry.Fill);
         }
         else if (shape == "rect") {
           console.log("Rectangle found");
           svg.append(shape)
-            .attr("x", entry.x) 
-            .attr("y", entry.y) 
+            .attr("x", entry.X) 
+            .attr("y", entry.Y) 
             .attr("width", entry.Width) 
             .attr("height", entry.Height) 
             .attr("fill", entry.Fill);
@@ -43,16 +32,16 @@
         else if (shape == "elipse") {
           console.log("Elipse found");
           svg.append(shape)
-            .attr("cx", entry.cx) 
-            .attr("cy", entry.cy) 
-            .attr("rx", entry.rx)
-            .attr("ry", entry.ry);
+            .attr("cx", entry.Cx) 
+            .attr("cy", entry.Cy) 
+            .attr("rx", entry.Rx)
+            .attr("ry", entry.Ry);
         }
         else if (shape == "text") {
           console.log("Text found");
           svg.append("text")
-            .attr("x", entry.x)
-            .attr("y", entry.y) 
+            .attr("x", entry.X)
+            .attr("y", entry.Y) 
             .attr("stroke", entry.Stroke) 
             .text(entry.Text);
         }
