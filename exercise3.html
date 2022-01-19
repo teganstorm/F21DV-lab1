@@ -12,11 +12,11 @@
     function exercise3() {
       for (let i=1; i<11; i++) {
         if (i<6) {
-          let newelement = d3.select("body").append('p')
+          let newelement = d3.select("body").append('div')
           newelement.text(i)
           newelement.style("color", "red")
         } else {
-          let newelement = d3.select("body").append('p')
+          let newelement = d3.select("body").append('div')
           newelement.text(i)
           newelement.style("color", "green")
         }
