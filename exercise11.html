@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+	<button> <a href="index.html">Back</a> </button>
+  <div></div> 
+  <script>
+    //Create SVG element
+    var svg = d3.select("body") 
+      .append("svg")
+      .attr("width", 400)
+      .attr("height", 400) 
+      .style("border", '2px solid green');
+
+    //Create line element inside SVG
+    // line 1
+    svg.append("line")
+      .attr("x1", 100) 
+      .attr("x2", 300) 
+      .attr("y1", 300) 
+      .attr("y2", 300) 
+      .attr("stroke", "blue")
+
+    // line 2
+    svg.append("line")
+      .attr("x1", 300)
+      .attr("x2", 300)
+      .attr("y1", 100)
+      .attr("y2", 300)
+      .attr("stroke", "purple")
+
+    // line 3
+    svg.append("line")
+      .attr("x1", 100)
+      .attr("x2", 300)
+      .attr("y1", 100)
+      .attr("y2", 100)
+      .attr("stroke", "pink")
+
+    // line 4
+    svg.append("line")
+      .attr("x1", 100)
+      .attr("x2", 100)
+      .attr("y1", 100)
+      .attr("y2", 300)
+      .attr("stroke", "red")
+    
+  </script>
+</body>
+
+</html>
