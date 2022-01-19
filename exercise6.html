@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <script src='https://d3js.org/d3.v7.min.js'></script>
+  </head>
+
+  <body>
+    <button> <a href="index.html">Back</a> </button>
+    <div></div>
+    <div></div>
+    <div></div>
+	  <div></div>
+    <script>
+      let otherdata = [ {name:'test', val:1},
+        {name:'other', val:2}, 
+        {name:'b', val:3},
+        {name:'color', val:'purple'}];
+      
+      let paragraph = d3.select("body") 
+        .selectAll("div")
+        .data(otherdata)
+        .text(function (d, i) {
+          console.log("d.name: " + d.name); 
+          console.log("d.val: " + d.val); 
+          console.log("i: " + i); 
+          console.log("this: " + this);
+		    return 'cont:' + d.val; // return value is used to set the 'text'
+      });
+      
+    </script>
+  </body>
+</html>
