@@ -1,5 +1,6 @@
-ShapeType, x, y, Width, Height, Fill, cx, cy,r, rx, ry, Text
-"circle", , , , , "pink", 160, 160, 50, , ,
-"circle", , , , , "purple", 300, 300, 75, , ,
-"circle", , , , , , 200, 200, 25, , , 
-"rect", 10, 20, 200, 100, "yellow", , , , , ,
+ShapeType, x, y, Width, Height, Fill, cx, cy,r, rx, ry, Text, Stroke
+"circle", , , , , "pink", 160, 160, 50, , , ,
+"circle", , , , , "purple", 300, 300, 75, , , ,
+"circle", , , , , , 200, 200, 25, , , ,
+"rect", 10, 20, 200, 100, "yellow", , , , , , ,
+"text", 150, 195, , , , , , , , , "Hello World!", "orange"
