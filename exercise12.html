@@ -21,22 +21,41 @@
       for (var i=0; i<data.length; i++) {
         var entry = data[i];
         var shape = entry.ShapeType;
+        console.log(entry)
 
         if (shape == "circle") {
+          console.log("Circle found");
           svg.append(shape)
             .attr("cx", entry.cx) 
             .attr("cy", entry.cy) 
             .attr("r", entry.r)
+            .attr("fill", entry.Fill);
         }
         else if (shape == "rect") {
+          console.log("Rectangle found");
           svg.append(shape)
             .attr("x", entry.x) 
             .attr("y", entry.y) 
             .attr("width", entry.Width) 
             .attr("height", entry.Height) 
-            .attr("fill", entry.Fill)
+            .attr("fill", entry.Fill);
         }
-
+        else if (shape == "elipse") {
+          console.log("Elipse found");
+          svg.append(shape)
+            .attr("cx", entry.cx) 
+            .attr("cy", entry.cy) 
+            .attr("rx", entry.rx)
+            .attr("ry", entry.ry);
+        }
+        else if (shape == "text") {
+          console.log("Text found");
+          svg.append("text")
+            .attr("x", entry.x)
+            .attr("y", entry.y) 
+            .attr("stroke", entry.Stroke) 
+            .text(entry.Text);
+        }
       }
     })
 
