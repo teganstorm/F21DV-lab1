@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+	<button> <a href="index.html">Back</a> </button>
+	<div></div>
+
+  <script>
+
+    const width = 400; 
+    const height = 300;
+    var data = [10, 15, 20, 25, 30]; 
+
+    var svg = d3.select("body")
+      .append("svg") .attr("width", width)
+      .attr("height", height);
+
+    var xscale = d3.scaleLinear() 
+      .domain([0, d3.max(data)]) 
+      .range([0, width - 100]);
+
+    var yscale = d3.scaleLinear() 
+      .domain([0, d3.max(data)]) 
+      .range([height/2, 0]);
+
+    var x_axis = d3.axisBottom() 
+      .scale(xscale);
+
+    var y_axis = d3.axisLeft() 
+      .scale(yscale);
+
+    svg.append("g")
+      .attr("transform", "translate(50, 20)") 
+      .call(y_axis);
+
+    var xAxisTranslate = height/2 + 20;
+    svg.append("g")
+      .attr("transform", "translate(50, " + xAxisTranslate +")") 
+      .call(x_axis);
+  
+    var x_axis2 = d3.axisTop()
+      .scale(xscale);
+    
+    var y_axis2 = d3.axisRight()
+      .scale(yscale)
+
+	  var yAxisTranslate = width-50;
+    axis = svg.append("g")
+      .attr("transform", "translate("+yAxisTranslate+", 20)")
+      .call(y_axis2)
+      .attr("stroke", "blue")
+      .style("path", "blue")
+    axis.select("path").style("stroke", "blue")
+  
+    
+	  var xAxisTranslate2 = 20;
+    axis2 = svg.append("g")
+      .attr("transform", "translate(50, " + xAxisTranslate2 +")")
+      .call(x_axis2)
+      .attr("stroke", "blue");
+	  axis2.select("path").style("stroke", "blue")
+
+  </script>
+</body>
+
+</html>
