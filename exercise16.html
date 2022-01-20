@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+	<button> <a href="index.html">Back</a> </button>
+  <script>
+
+		let heartfailurecsv = 'https://raw.githubusercontent.com/akmand/datasets/master/heart_failure.csv';
+		/* age,anaemia,creatinine_phosphokinase,diabetes,ejection_fraction,high_blood_pressure,platelets,serum_creatini
+		ne,serum_sodium,sex,smoking,time,DEATH_EVENT
+		75,0,582,0,20,1,265000,1.9,130,1,0,4,1 55,0,7861,0,38,0,263358.03,1.1,136,1,0,6,1
+		65,0,146,0,20,0,162000,1.3,129,1,1,7,1 50,1,111,0,20,0,210000,1.9,137,1,0,7,1 */
+		d3.csv(heartfailurecsv).then(function(data) {
+		//console.log( data.age);
+		// todo
+      var under30 = 0;
+      var under40 = 0 ;
+      var under60 = 0;
+      var under100 = 0;
+      for (var i=0; i<data.length; i++) { 
+        var entry=data[i]; 
+        var age=entry.age; 
+        if ((1<=age)&&(age <=30)) { 
+          under30++; 
+        } else if ((31<=age)&&(age<=40)){ 
+          under40++; 
+        } else if ((41<=age)&&(age<=60)) { 
+          under60++; 
+        } else if((61<=age)&&(age<=100)){ 
+          under100++; 
+        } 
+      } 
+      var width = 1200; 
+      var height = 400;
+      var data_array=[under30, under40, under60, under100]; 
+      var agerange_array=[30, 40 , 60 , 100 ];
+      const colors = ['blue','lightblue','purple','pink'];
+
+      const p = d3.select("body") 
+        .append("p")
+        .text("Heart failiure data presented in circles")
+
+      const svg = d3.select("body") 
+        .append("svg")
+        .attr("width", width) 
+        .attr("height", height);
+
+      const g = svg.selectAll("g") 
+        .data(data_array)
+        .enter()
+        .append("g")
+        .attr("transform", function(d, i) {
+          return "translate(0,0)"; 
+        })
+
+      g.append("circle") 
+        .attr("cx", function(d, i) {
+          return i*300 + 50; 
+        })
+        .attr("cy", function(d, i) { 
+          return 200;
+        })
+        .attr("r", function(d) {
+          return d; 
+        })
+        .attr("fill", function(d, i){ 
+          return colors[i];
+        })
+
+      g.append("text") 
+        .attr("x", function(d, i) {
+          return i * 300 + 40; 
+        })
+        .attr("y", 205)
+        .attr("stroke", "black") 
+        .attr("font-size", "12px") 
+        .attr("font-family", "sans-serif") 
+        .text(function(d, i) {
+          return agerange_array[i]; 
+        });
+
+      const p2 = d3.select("body") 
+        .append("p")
+        .text("Heart failiure data presented in squares:")
+
+      const svg2 = d3.select("body") 
+        .append("svg")
+        .attr("width", width) 
+        .attr("height", height);
+
+      const g2 = svg2.selectAll("g") 
+        .data(data_array)
+        .enter()
+        .append("g")
+        .attr("transform", function(d, i) {
+          return "translate(0,0)"; 
+        })
+
+      g2.append("rect") 
+        .attr("x", function(d, i) {
+          return i*300+40; 
+        })
+        .attr("y", function(d, i) { 
+          return 100;
+        })
+        .attr("width", function(d) {
+          return d; 
+        })
+        .attr("height", function(d) {
+          return d; 
+        })
+        .attr("fill", function(d, i){ 
+          return colors[i];
+        })
+
+      g2.append("text") 
+        .attr("x", function(d, i) {
+          return i * 300+40+(d/2); 
+        })
+        .attr("y", function(d) {
+          return 105+(d/2)
+        })
+        .attr("stroke", "black") 
+        .attr("font-size", "12px") 
+        .attr("font-family", "sans-serif") 
+        .text(function(d, i) {
+          return agerange_array[i]; 
+        });
+
+    })
+
+  </script>
+
+</body>
+
+</html>
