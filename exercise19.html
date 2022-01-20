@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+	<button> <a href="index.html">Back</a> </button>
+  <div></div>
+  <script>
+
+    function polt_bars(datacsv) {
+      d3.csv(datacsv).then(function(d) {
+        var data = [];
+        for (var i=0; i<d.length; i++) {
+          var value = d[i].Value;
+          data[i] = parseInt(value);
+        }
+        
+        const width = 500; 
+        const barHeight = 20; 
+        const margin = 1;
+
+        var scale = d3.scaleLinear()
+          .domain([d3.min(data), d3.max(data)]) 
+          .range([50, 500]);
+
+        var svg = d3.select("body") 
+          .append("svg")
+          .attr("width", width)
+          .attr("height", barHeight * data.length);
+
+        var g = svg.selectAll("g") .data(data)
+          .enter()
+          .append("g")
+          .attr("transform", function (d, i) {
+            return "translate(0," + i * barHeight + ")"; 
+          });
+
+        g.append("rect") 
+        .attr("width", function (d) {
+          return scale(d); })
+        // https://f21dv.github.io/material/lectures/Lecture%2002%20-%20Analytics%20and%20Aesthetics.html#/
+        .style("fill", function(d){ if(d<100){return "green" } else if (d>500){ return "red"} else {return "blue" }})
+        .attr("height", barHeight - margin)
+
+        g.append("text")
+          .attr("x", function (d) { return (scale(d)); }) .attr("y", barHeight / 2)
+          .attr("dy", ".35em")
+          .style('text-anchor', 'end')
+          .text(function (d) { 
+            return d; 
+          });
+        
+      })
+    }
+
+	  var data = 'https://raw.githubusercontent.com/teganstorm/F21DV-lab1/master/data1.csv';
+    polt_bars(data)
+	  polt_bars(data)
+
+    
+
+  </script>
+
+
+</body>
+
+</html>
