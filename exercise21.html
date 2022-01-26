@@ -34,9 +34,9 @@
           .domain([0, d3.max(data)]) 
           .range([0, width-100]);
 
-        var yscale = d3.scaleLinear() 
-          .domain([0, data.length]) 
-          .range([height, 0]);
+        var yscale = d3.scaleBand() 
+          .domain(data.map(function(d,i) { return i; }))
+          .range([0, height]);
 
         var x_axis = d3.axisBottom() 
           .scale(scale);
@@ -65,7 +65,7 @@
         .attr("width", function (d) {
           return scale(d); })
         // https://f21dv.github.io/material/lectures/Lecture%2002%20-%20Analytics%20and%20Aesthetics.html#/
-        .style("fill", function(d){ if(d<100){return "green" } else if (d>500){ return "red"} else {return "blue" }})
+        .style("fill", function(d, i){ if(d<100){return "green" } else if (d>500){ return "red"} else {return "blue" }})
         .attr("height", barHeight - margin)
 
 		    bar.append("text")
@@ -88,6 +88,13 @@
     
 
 	</script>
+
+<script>
+	var myColor0 = d3.scaleLinear().domain([1,10]).range(["white", "blue"]);
+  console.log( 'col 0:', myColor0(0) ); 
+  console.log( 'col 2:', myColor0(2) ); 
+  console.log( 'col 9:', myColor0(9) ); 
+</script>
 
 
 </body>
