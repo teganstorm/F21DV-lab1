@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+	<button> <a href="index.html">Back</a> </button>
+	<div></div>
+	<script>
+		// Set Dimensions
+    const xSize = 600; 
+    const ySize = 600; 
+    const margin = 40;
+    const xMax = xSize - margin*2;
+    const yMax = ySize - margin*2;
+    // Create Random Points
+    const numPoints = 100;
+    const data_sin = [];
+    for (let i = 0; i < numPoints; i++) { data_sin.push( {x: i/100, y: Math.sin( 6.2 * i/100 ) } ); }
+    const data_cos = [];
+    for (let i = 0; i < numPoints; i++) { data_cos.push( {x: i/100, y: Math.cos(6.2 *i/100 ) } ); }
+    // Get the 'limits' of the data - the full extent (mins and max) // so the plotted data fits perfectly
+    const xExtent = d3.extent( data_sin, d=>{ return d.x } );
+    const yExtent = d3.extent( data_sin, d=>{ return d.y } );
+
+
+    // Append SVG Object to the Page const 
+    svg = d3.select("body")
+    .append("svg")
+    .attr('width', xSize )
+    .attr('height', ySize )
+    .append("g")
+    .attr("transform","translate(" + margin + "," + margin + ")");
+    // X Axis
+    const x = d3.scaleLinear()
+    .domain([ xExtent[0], xExtent[1] ]) .range([0, xMax]);
+    // bottom 
+    svg.append("g")
+    .attr("transform", "translate(0," + yMax + ")") .call(d3.axisBottom(x))
+    .attr('color', 'green'); // make bottom axis green
+    // top 
+    svg.append("g")
+    .call(d3.axisTop(x));
+    // Y Axis
+    const y = d3.scaleLinear()
+    .domain([ yExtent[0], yExtent[1] ]) .range([ yMax, 0]);
+    // left y axis 
+    svg.append("g")
+    .call(d3.axisLeft(y));
+    // right y axis 
+    svg.append("g")
+    .attr("transform", `translate(${yMax},0)`) .call(d3.axisRight(y));
+
+    // Add the line 
+    svg.append("path")
+    .datum(data_sin)
+    .attr("fill", "none") .attr("stroke", "blue") .attr("stroke-width", 1.5) .attr("d", d3.line()
+    .x(function(d) { return x(d.x) })
+    .y(function(d) { return y(d.y) }) );
+
+    // create a tooltip
+    var Tooltip = d3.select("#my_dataviz")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "2px")
+      .style("border-radius", "5px")
+      .style("padding", "5px")
+
+      // Three function that change the tooltip when user hover / move / leave a cell
+      var mouseover = function(d) {
+        Tooltip
+          .style("opacity", 1)
+      }
+      var mousemove = function(d) {
+        Tooltip
+          .html("Exact value: " + d.value)
+          .style("left", (d3.mouse(this)[0]+70) + "px")
+          .style("top", (d3.mouse(this)[1]) + "px")
+      }
+      var mouseleave = function(d) {
+        Tooltip
+          .style("opacity", 0)
+      }
+
+    node = svg.selectAll("dot")
+      .data(data_sin)
+      .enter()
+    node.append("circle")
+      .attr("cx", function (d) { return x(d.x) } ) .attr("cy", function (d) { return y(d.y) } ) .attr("r", 2)
+      .style("fill", "black");
+    node.append("text")
+      .attr("x", function(d) { return x(d.x); })
+      .attr("y", function(d) { return y(d.y); })
+      .text(function(d, i) {
+        if (i%10 == 0){
+          return "("+d.x+", "+d.y+")"}});
+
+
+	</script>
+</body>
+
+</html>
