@@ -39,7 +39,7 @@
     // bottom 
     svg.append("g")
     .attr("transform", "translate(0," + yMax + ")") .call(d3.axisBottom(x))
-    .attr('color', 'black'); // make bottom axis green
+    .attr('color', 'black'); 
     // top 
     svg.append("g")
     .call(d3.axisTop(x));
@@ -53,18 +53,32 @@
     svg.append("g")
     .attr("transform", `translate(${yMax},0)`) .call(d3.axisRight(y));
 
-	var colours = d3.scaleLinear().domain([1,data_sin.length]).range(["pink", "blue"]);
+	const max = d3.max(data_sin, function(d) { return +d.value; })
+    svg.append("linearGradient")
+      .attr("id", "line-gradient")
+      .attr("gradientUnits", "userSpaceOnUse")
+      .attr("x1", 0)
+      .attr("y1", y(0))
+      .attr("x2", 0)
+      .attr("y2", y(max))
+      .selectAll("stop")
+      .data([
+      {offset: "0%", color: "pink"},
+      {offset: "100%", color: "blue"}
+      ])
+      .enter().append("stop")
+      .attr("offset", function(d) { return d.offset; })
+      .attr("stop-color", function(d) { return d.color; });
     // Add the line 
     svg.append("path")
     .datum(data_sin)
     .attr("fill", "none") 
-    .attr("stroke", function(d,i) {
-      return colours(i)
-    }) 
+    .attr("stroke", "url(#line-gradient)") 
     .attr("stroke-width", 1.5) 
     .attr("d", d3.line()
-    .x(function(d) { return x(d.x) })
-    .y(function(d) { return y(d.y) }) );
+      .x(function(d) { return x(d.x) })
+      .y(function(d) { return y(d.y) }) 
+    );
 
 
 
