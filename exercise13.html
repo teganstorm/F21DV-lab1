@@ -18,16 +18,16 @@
 
     var data = 'https://raw.githubusercontent.com/teganstorm/F21DV-lab1/master/svg2.csv';
     d3.csv(data).then(function(data) {
-	    svg.selectAll()
-        .data(data)
-        .enter()
-        .append("circle")
-        .attr("cx", function(d) { return d.Cx }) 
-        .attr("cy", function(d) { return d.Cy }) 
-        .attr("r", function(d) { return d.R })
-        .attr("fill", function(d) { return d.Fill })
-        .exit()
-        .remove();
+	svg.selectAll()
+		.data(data)
+		.enter()
+		.append("circle")
+		.attr("cx", function(d) { return d.Cx }) 
+		.attr("cy", function(d) { return d.Cy }) 
+		.attr("r", function(d) { return d.R })
+		.attr("fill", function(d) { return d.Fill })
+		.exit()
+		.remove();
       })
 
     
